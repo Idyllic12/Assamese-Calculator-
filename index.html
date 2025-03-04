@@ -4,7 +4,235 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assamese Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100dvh;
+            background-color: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        .calculator {
+            width: 100%;
+            max-width: 450px;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            background-color: #1c1c1c;
+            border-radius: 0;
+            padding: 6px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .display-container {
+            width: 100%;
+            flex: 0 0 30%;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 6px;
+        }
+
+        .display {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .display input#result {
+            width: 100%;
+            height: 50%;
+            text-align: right;
+            font-size: clamp(3rem, 8vw, 4.5rem);
+            border: none;
+            background: transparent;
+            color: white;
+            outline: none;
+            padding: 0 10px;
+            font-weight: 300;
+        }
+
+        .history {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: #e0e0e0;
+            line-height: 1.4;
+            text-align: right;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 5px 10px;
+        }
+
+        .history p {
+            margin: 2px 0;
+        }
+
+        .live-result {
+            width: 100%;
+            text-align: right;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: #ffb84d;
+            padding: 0 10px;
+            min-height: 24px;
+            opacity: 0.9;
+        }
+
+        .buttons-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 5px 0;
+            overflow-y: auto;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 4px;
+            width: 100%;
+            flex: 1;
+        }
+
+        button {
+            padding: 4px;
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: bold;
+            background-color: #333333;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            height: auto;
+            min-height: 45px;
+        }
+
+        button:hover {
+            background-color: #4a4a4a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .equal {
+            background-color: #ff9500;
+        }
+
+        .equal:hover {
+            background-color: #ffaa33;
+        }
+
+        button:nth-child(4n) {
+            background-color: #ff9500;
+        }
+
+        button:nth-child(4n):hover {
+            background-color: #ffaa33;
+        }
+
+        .zero {
+            /* No special styling, behaves like other buttons */
+        }
+
+        .advanced-buttons {
+            display: none;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 4px;
+            width: 100%;
+        }
+
+        .advanced-buttons button {
+            padding: 4px;
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: bold;
+            height: auto;
+            min-height: 45px;
+        }
+
+        .display-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .display-container::-webkit-scrollbar-thumb {
+            background: #ffb84d;
+            border-radius: 2px;
+        }
+
+        .display-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 450px) {
+            .calculator {
+                padding: 3px;
+            }
+            
+            .display-container {
+                flex: 0 0 25%;
+                min-height: 140px;
+            }
+            
+            .display input#result {
+                font-size: clamp(2.5rem, 7vw, 4rem);
+                padding: 0 8px;
+            }
+            
+            .history {
+                font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+                padding: 4px 8px;
+            }
+            
+            .live-result {
+                font-size: clamp(1.5rem, 4vw, 2rem);
+                padding: 0 8px;
+                min-height: 20px;
+            }
+            
+            .buttons-container {
+                padding: 3px 0;
+            }
+            
+            .buttons {
+                gap: 3px;
+            }
+            
+            button {
+                padding: 3px;
+                font-size: clamp(1.8rem, 5vw, 2.5rem);
+                min-height: 40px;
+            }
+            
+            .advanced-buttons {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3px;
+            }
+            
+            .advanced-buttons button {
+                padding: 3px;
+                font-size: clamp(1.8rem, 5vw, 2.5rem);
+                min-height: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="calculator">
@@ -34,9 +262,9 @@
                 <button onclick="appendNumber('3')">৩</button>
                 <button onclick="appendOperator('+')">+</button>
                 <button onclick="toggleAdvanced()">Adv</button>
-                <button onclick="appendNumber('0')">০</button> <!-- Zero button -->
+                <button onclick="appendNumber('0')">০</button>
                 <button onclick="appendPoint()">.</button>
-                <button onclick="calculateResult()" class="equal">=</button> <!-- Equal button -->
+                <button onclick="calculateResult()" class="equal">=</button>
             </div>
             <div id="advanced-buttons" class="advanced-buttons">
                 <button onclick="square()">x²</button>
@@ -51,6 +279,305 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
+
+    <script>
+        const result = document.getElementById('result');
+        const historyDiv = document.getElementById('history');
+        const advancedButtons = document.getElementById('advanced-buttons');
+        const liveResultDiv = document.getElementById('live-result');
+        let memory = 0;
+
+        const assameseNumbers = {
+            '0': '০', '1': '১', '2': '২', '3': '৩', '4': '৪',
+            '5': '৫', '6': '৬', '7': '৭', '8': '৮', '9': '৯'
+        };
+
+        function toAssameseNumbers(value) {
+            return String(value).replace(/\d/g, digit => assameseNumbers[digit] || digit);
+        }
+
+        function appendNumber(number) {
+            if (!result) {
+                console.error("Result input not found!");
+                return;
+            }
+            const assameseNum = Object.values(assameseNumbers)[parseInt(number)] || number;
+            result.value += assameseNum;
+            showLiveResult();
+        }
+
+        function appendOperator(operator) {
+            if (!result.value) return;
+            const displayOperator = {
+                '*': '×',
+                '/': '÷',
+                '+': '+',
+                '-': '-'
+            }[operator] || operator;
+            result.value += displayOperator;
+            showLiveResult();
+        }
+
+        function appendPoint() {
+            if (!result.value.includes('.') || result.value.split(/[×÷+-]/).pop().includes('.')) {
+                result.value += '.';
+                showLiveResult();
+            }
+        }
+
+        function clearDisplay() {
+            result.value = '';
+            historyDiv.innerHTML = '';
+            liveResultDiv.innerHTML = '';
+            memory = 0;
+        }
+
+        function deleteLast() {
+            result.value = result.value.slice(0, -1);
+            showLiveResult();
+        }
+
+        function calculateResult() {
+            try {
+                let expression = result.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/');
+
+                Object.entries(assameseNumbers).forEach(([eng, as]) => {
+                    expression = expression.replace(new RegExp(as, 'g'), eng);
+                });
+
+                if (expression.includes('^')) {
+                    const [base, exponent] = expression.split('^').map(part => eval(part));
+                    const calculationResult = Math.pow(base, exponent);
+                    const assameseResult = toAssameseNumbers(calculationResult.toString());
+                    historyDiv.innerHTML = `<p>${result.value} = ${assameseResult}</p>` + historyDiv.innerHTML;
+                    result.value = assameseResult;
+                    liveResultDiv.innerHTML = '';
+                } else {
+                    const calculationResult = eval(expression);
+                    if (isNaN(calculationResult) || !isFinite(calculationResult)) {
+                        throw new Error('Invalid calculation');
+                    }
+                    const assameseResult = toAssameseNumbers(calculationResult.toString());
+                    historyDiv.innerHTML = `<p>${result.value} = ${assameseResult}</p>` + historyDiv.innerHTML;
+                    result.value = assameseResult;
+                    liveResultDiv.innerHTML = '';
+                }
+            } catch {
+                result.value = 'ভুল';
+                liveResultDiv.innerHTML = '';
+            }
+        }
+
+        function showLiveResult() {
+            try {
+                let expression = result.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/');
+
+                Object.entries(assameseNumbers).forEach(([eng, as]) => {
+                    expression = expression.replace(new RegExp(as, 'g'), eng);
+                });
+
+                const liveCalculation = eval(expression);
+                if (isFinite(liveCalculation) && !isNaN(liveCalculation)) {
+                    liveResultDiv.innerHTML = "= " + toAssameseNumbers(liveCalculation.toString());
+                } else {
+                    liveResultDiv.innerHTML = '';
+                }
+            } catch {
+                liveResultDiv.innerHTML = '';
+            }
+        }
+
+        function squareRoot() {
+            try {
+                let expression = result.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/');
+                Object.entries(assameseNumbers).forEach(([eng, as]) => {
+                    expression = expression.replace(new RegExp(as, 'g'), eng);
+                });
+
+                const calculationResult = Math.sqrt(eval(expression));
+                if (isNaN(calculationResult)) throw new Error('Invalid sqrt');
+                
+                result.value = toAssameseNumbers(calculationResult.toString());
+                historyDiv.innerHTML = `<p>√(${expression}) = ${result.value}</p>` + historyDiv.innerHTML;
+                liveResultDiv.innerHTML = '';
+            } catch {
+                result.value = 'ভুল';
+            }
+        }
+
+        function square() {
+            try {
+                let expression = result.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/');
+                Object.entries(assameseNumbers).forEach(([eng, as]) => {
+                    expression = expression.replace(new RegExp(as, 'g'), eng);
+                });
+
+                const calculationResult = Math.pow(eval(expression), 2);
+                result.value = toAssameseNumbers(calculationResult.toString());
+                historyDiv.innerHTML = `<p>(${expression})² = ${result.value}</p>` + historyDiv.innerHTML;
+                liveResultDiv.innerHTML = '';
+            } catch {
+                result.value = 'ভুল';
+            }
+        }
+
+        function power() {
+            try {
+                let base = result.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/');
+                Object.entries(assameseNumbers).forEach(([eng, as]) => {
+                    base = base.replace(new RegExp(as, 'g'), eng);
+                });
+
+                const baseNum = eval(base);
+                result.value += "^";
+                liveResultDiv.innerHTML = '';
+            } catch {
+                result.value = 'ভুল';
+            }
+        }
+
+        function logarithm() {
+            try {
+                let expression = result.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/');
+                Object.entries(assameseNumbers).forEach(([eng, as]) => {
+                    expression = expression.replace(new RegExp(as, 'g'), eng);
+                });
+
+                const calculationResult = Math.log10(eval(expression));
+                if (isNaN(calculationResult) || !isFinite(calculationResult)) throw new Error('Invalid log');
+                
+                result.value = toAssameseNumbers(calculationResult.toString());
+                historyDiv.innerHTML = `<p>log(${expression}) = ${result.value}</p>` + historyDiv.innerHTML;
+                liveResultDiv.innerHTML = '';
+            } catch {
+                result.value = 'ভুল';
+            }
+        }
+
+        function sine() {
+            try {
+                let expression = result.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/');
+                Object.entries(assameseNumbers).forEach(([eng, as]) => {
+                    expression = expression.replace(new RegExp(as, 'g'), eng);
+                });
+
+                const calculationResult = Math.sin(eval(expression) * Math.PI / 180);
+                result.value = toAssameseNumbers(calculationResult.toString());
+                historyDiv.innerHTML = `<p>sin(${expression}) = ${result.value}</p>` + historyDiv.innerHTML;
+                liveResultDiv.innerHTML = '';
+            } catch {
+                result.value = 'ভুল';
+            }
+        }
+
+        function cosine() {
+            try {
+                let expression = result.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/');
+                Object.entries(assameseNumbers).forEach(([eng, as]) => {
+                    expression = expression.replace(new RegExp(as, 'g'), eng);
+                });
+
+                const calculationResult = Math.cos(eval(expression) * Math.PI / 180);
+                result.value = toAssameseNumbers(calculationResult.toString());
+                historyDiv.innerHTML = `<p>cos(${expression}) = ${result.value}</p>` + historyDiv.innerHTML;
+                liveResultDiv.innerHTML = '';
+            } catch {
+                result.value = 'ভুল';
+            }
+        }
+
+        function tangent() {
+            try {
+                let expression = result.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/');
+                Object.entries(assameseNumbers).forEach(([eng, as]) => {
+                    expression = expression.replace(new RegExp(as, 'g'), eng);
+                });
+
+                const calculationResult = Math.tan(eval(expression) * Math.PI / 180);
+                if (!isFinite(calculationResult)) throw new Error('Invalid tan');
+                
+                result.value = toAssameseNumbers(calculationResult.toString());
+                historyDiv.innerHTML = `<p>tan(${expression}) = ${result.value}</p>` + historyDiv.innerHTML;
+                liveResultDiv.innerHTML = '';
+            } catch {
+                result.value = 'ভুল';
+            }
+        }
+
+        function percentage() {
+            try {
+                let expression = result.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/');
+                Object.entries(assameseNumbers).forEach(([eng, as]) => {
+                    expression = expression.replace(new RegExp(as, 'g'), eng);
+                });
+
+                const calculationResult = eval(expression) / 100;
+                result.value = toAssameseNumbers(calculationResult.toString());
+                historyDiv.innerHTML = `<p>${expression}% = ${result.value}</p>` + historyDiv.innerHTML;
+                liveResultDiv.innerHTML = '';
+            } catch {
+                result.value = 'ভুল';
+            }
+        }
+
+        function memorySave() {
+            try {
+                memory = eval(result.value
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/')
+                    .replace(/[০-৯]/g, match => Object.keys(assameseNumbers).find(key => assameseNumbers[key] === match)));
+            } catch {
+                memory = 0;
+            }
+        }
+
+        function memoryRecall() {
+            result.value = toAssameseNumbers(memory.toString());
+            showLiveResult();
+        }
+
+        function toggleAdvanced() {
+            advancedButtons.style.display = 
+                (advancedButtons.style.display === "none" || !advancedButtons.style.display) 
+                ? "grid" 
+                : "none";
+        }
+
+        document.addEventListener("keydown", function(event) {
+            const key = event.key;
+            if (/[0-9]/.test(key)) {
+                const assameseNum = assameseNumbers[key];
+                result.value += assameseNum;
+                showLiveResult();
+            }
+            else if (["+", "-", "*", "/"].includes(key)) appendOperator(key);
+            else if (key === ".") appendPoint();
+            else if (key === "Enter" || key === "=") calculateResult();
+            else if (key === "Backspace") deleteLast();
+            else if (key === "Escape") clearDisplay();
+            event.preventDefault();
+        });
+
+        window.onload = function() {
+            if (!result) console.error("Result element not found");
+            if (
