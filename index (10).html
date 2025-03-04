@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assamese Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display-container">
+            <div class="display">
+                <input id="result" type="text" readonly>
+                <div id="history" class="history"></div>
+                <div id="live-result" class="live-result"></div>
+            </div>
+        </div>
+        <div class="buttons-container">
+            <div class="buttons">
+                <button onclick="clearDisplay()">AC</button>
+                <button onclick="deleteLast()">⌫</button>
+                <button onclick="percentage()">%</button>
+                <button onclick="appendOperator('/')">÷</button>
+                <button onclick="appendNumber('7')">৭</button>
+                <button onclick="appendNumber('8')">৮</button>
+                <button onclick="appendNumber('9')">৯</button>
+                <button onclick="appendOperator('*')">×</button>
+                <button onclick="appendNumber('4')">৪</button>
+                <button onclick="appendNumber('5')">৫</button>
+                <button onclick="appendNumber('6')">৬</button>
+                <button onclick="appendOperator('-')">-</button>
+                <button onclick="appendNumber('1')">১</button>
+                <button onclick="appendNumber('2')">২</button>
+                <button onclick="appendNumber('3')">৩</button>
+                <button onclick="appendOperator('+')">+</button>
+                <button onclick="toggleAdvanced()">Adv</button>
+                <button onclick="appendNumber('0')">০</button> <!-- Zero button -->
+                <button onclick="appendPoint()">.</button>
+                <button onclick="calculateResult()" class="equal">=</button> <!-- Equal button -->
+            </div>
+            <div id="advanced-buttons" class="advanced-buttons">
+                <button onclick="square()">x²</button>
+                <button onclick="squareRoot()">√</button>
+                <button onclick="power()">xʸ</button>
+                <button onclick="logarithm()">log</button>
+                <button onclick="sine()">sin</button>
+                <button onclick="cosine()">cos</button>
+                <button onclick="tangent()">tan</button>
+                <button onclick="memorySave()">M+</button>
+                <button onclick="memoryRecall()">MR</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
