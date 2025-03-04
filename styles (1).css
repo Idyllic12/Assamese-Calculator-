@@ -1,0 +1,229 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+    background-color: #0a0a0a;
+    color: white;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+.calculator {
+    width: 100%;
+    max-width: 450px;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background-color: #1c1c1c;
+    border-radius: 0;
+    padding: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.display-container {
+    width: 100%;
+    flex: 0 0 35%; /* Adjusted to fit larger display numbers */
+    min-height: 160px; /* Increased to accommodate larger text */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 6px;
+}
+
+.display {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.display input#result {
+    width: 100%;
+    height: 50%;
+    text-align: right;
+    font-size: clamp(2.5rem, 7vw, 4rem); /* Increased to match screenshot */
+    border: none;
+    background: transparent;
+    color: white;
+    outline: none;
+    padding: 0 10px;
+    font-weight: 300;
+}
+
+.history {
+    font-size: clamp(1.2rem, 3.5vw, 1.8rem); /* Increased to match screenshot */
+    color: #e0e0e0;
+    line-height: 1.4;
+    text-align: right;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 5px 10px;
+}
+
+.history p {
+    margin: 2px 0;
+}
+
+.live-result {
+    width: 100%;
+    text-align: right;
+    font-size: clamp(1.5rem, 4.5vw, 2.2rem); /* Increased to match screenshot */
+    color: #ffb84d;
+    padding: 0 10px;
+    min-height: 24px; /* Increased for larger text */
+    opacity: 0.9;
+}
+
+.buttons-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px 0;
+    overflow-y: auto;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 4px;
+    width: 100%;
+    flex: 1;
+}
+
+button {
+    padding: 4px;
+    font-size: clamp(1.5rem, 4.5vw, 2.2rem); /* Increased to match screenshot */
+    font-weight: bold;
+    background-color: #333333;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    height: auto;
+    min-height: 40px; /* Increased to accommodate larger text */
+}
+
+button:hover {
+    background-color: #4a4a4a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.equal {
+    background-color: #ff9500;
+}
+
+.equal:hover {
+    background-color: #ffaa33;
+}
+
+button:nth-child(4n) {
+    background-color: #ff9500;
+}
+
+button:nth-child(4n):hover {
+    background-color: #ffaa33;
+}
+
+/* Remove the span for zero button */
+.zero {
+    /* No special styling, behaves like other buttons */
+}
+
+.advanced-buttons {
+    display: none;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 4px;
+    width: 100%;
+}
+
+.advanced-buttons button {
+    padding: 4px;
+    font-size: clamp(1.5rem, 4.5vw, 2.2rem); /* Increased to match main buttons */
+    font-weight: bold;
+    height: auto;
+    min-height: 40px;
+}
+
+.display-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.display-container::-webkit-scrollbar-thumb {
+    background: #ffb84d;
+    border-radius: 2px;
+}
+
+.display-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Media query for smaller screens (phones) */
+@media (max-width: 450px) {
+    .calculator {
+        padding: 3px;
+    }
+    
+    .display-container {
+        flex: 0 0 30%;
+        min-height: 140px; /* Adjusted for larger text */
+    }
+    
+    .display input#result {
+        font-size: clamp(2rem, 6vw, 3.5rem); /* Adjusted for smaller screens */
+        padding: 0 8px;
+    }
+    
+    .history {
+        font-size: clamp(1rem, 3vw, 1.5rem);
+        padding: 4px 8px;
+    }
+    
+    .live-result {
+        font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+        padding: 0 8px;
+        min-height: 20px;
+    }
+    
+    .buttons-container {
+        padding: 3px 0;
+    }
+    
+    .buttons {
+        gap: 3px; /* Adjusted for larger buttons */
+    }
+    
+    button {
+        padding: 3px;
+        font-size: clamp(1.2rem, 4vw, 1.8rem); /* Adjusted for smaller screens */
+        min-height: 35px; /* Adjusted for larger text */
+    }
+    
+    .advanced-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+    }
+    
+    .advanced-buttons button {
+        padding: 3px;
+        font-size: clamp(1.2rem, 4vw, 1.8rem); /* Adjusted for smaller screens */
+        min-height: 35px;
+    }
+}
