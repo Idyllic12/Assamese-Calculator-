@@ -64,6 +64,16 @@
             font-weight: 300;
         }
 
+        .live-result {
+            width: 100%;
+            text-align: right;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: #ffb84d;
+            padding: 0 10px;
+            min-height: 24px;
+            opacity: 0.9;
+        }
+
         .history {
             font-size: clamp(1.5rem, 4vw, 2rem);
             color: #e0e0e0;
@@ -78,22 +88,12 @@
             margin: 2px 0;
         }
 
-        .live-result {
-            width: 100%;
-            text-align: right;
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            color: #ffb84d;
-            padding: 0 10px;
-            min-height: 24px;
-            opacity: 0.9;
-        }
-
         .buttons-container {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            padding: 5px 0;
+            gap: 4px; /* Reduced gap */
+            padding: 4px 0; /* Reduced padding */
             overflow-y: auto;
         }
 
@@ -101,24 +101,24 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             grid-template-rows: repeat(5, 1fr);
-            gap: 4px;
+            gap: 3px; /* Reduced gap */
             width: 100%;
             flex: 1;
         }
 
         button {
-            padding: 4px;
-            font-size: clamp(2rem, 6vw, 3rem);
+            padding: 3px; /* Reduced padding */
+            font-size: clamp(1.8rem, 5.5vw, 2.5rem); /* Reduced font size */
             font-weight: bold;
             background-color: #333333;
             border: none;
             color: white;
             cursor: pointer;
-            border-radius: 6px;
+            border-radius: 5px; /* Reduced border-radius */
             transition: all 0.2s ease;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             height: auto;
-            min-height: 45px;
+            min-height: 40px; /* Reduced min-height */
         }
 
         button:hover {
@@ -156,16 +156,16 @@
             display: none;
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(2, 1fr);
-            gap: 4px;
+            gap: 3px; /* Reduced gap */
             width: 100%;
         }
 
         .advanced-buttons button {
-            padding: 4px;
-            font-size: clamp(2rem, 6vw, 3rem);
+            padding: 3px; /* Reduced padding */
+            font-size: clamp(1.8rem, 5.5vw, 2.5rem); /* Reduced font size */
             font-weight: bold;
             height: auto;
-            min-height: 45px;
+            min-height: 40px; /* Reduced min-height */
         }
 
         .display-container::-webkit-scrollbar {
@@ -196,15 +196,15 @@
                 padding: 0 8px;
             }
             
-            .history {
-                font-size: clamp(1.2rem, 3.5vw, 1.8rem);
-                padding: 4px 8px;
-            }
-            
             .live-result {
                 font-size: clamp(1.5rem, 4vw, 2rem);
                 padding: 0 8px;
                 min-height: 20px;
+            }
+            
+            .history {
+                font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+                padding: 4px 8px;
             }
             
             .buttons-container {
@@ -212,24 +212,24 @@
             }
             
             .buttons {
-                gap: 3px;
+                gap: 2px; /* Further reduced gap */
             }
             
             button {
-                padding: 3px;
-                font-size: clamp(1.8rem, 5vw, 2.5rem);
-                min-height: 40px;
+                padding: 2px; /* Further reduced padding */
+                font-size: clamp(1.5rem, 4.5vw, 2rem); /* Further reduced font size */
+                min-height: 35px; /* Further reduced min-height */
             }
             
             .advanced-buttons {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 3px;
+                gap: 2px;
             }
             
             .advanced-buttons button {
-                padding: 3px;
-                font-size: clamp(1.8rem, 5vw, 2.5rem);
-                min-height: 40px;
+                padding: 2px;
+                font-size: clamp(1.5rem, 4.5vw, 2rem);
+                min-height: 35px;
             }
         }
     </style>
@@ -239,8 +239,8 @@
         <div class="display-container">
             <div class="display">
                 <input id="result" type="text" readonly>
-                <div id="history" class="history"></div>
                 <div id="live-result" class="live-result"></div>
+                <div id="history" class="history"></div>
             </div>
         </div>
         <div class="buttons-container">
@@ -587,5 +587,3 @@
     </script>
 </body>
 </html>
-
-        
